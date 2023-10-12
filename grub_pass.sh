@@ -47,7 +47,7 @@ EOF
 EOL
 
 # Установка прав на файл 07_password
-chmod 600 /etc/grub.d/07_password
+chmod 755 /etc/grub.d/07_password
 
 # Обновление настроек GRUB
 # & - это символ, который используется для объединения stdout и stderr.
