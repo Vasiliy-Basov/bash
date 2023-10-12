@@ -33,8 +33,9 @@ if [ "$password" != "$password_confirm" ]; then
 fi
 
 # Генерация хэша пароля с помощью grub-mkpasswd-pbkdf2
-# <<< - это оператор "here string" (здесь строка). Он используется для передачи текстовой строки в стандартный ввод команды слева от оператора.
-hashed_password=$(grub-mkpasswd-pbkdf2 <<< "$password")
+# echo -e, вы можете выводить такие escape-последовательности, как \n для перевода строки, \t для табуляции и другие.
+# | awk '{print $5}' - Берем только пятый столбец, разделитель пробел.
+hashed_password=$(echo -e "$password\n$password_confirm" | grub-mkpasswd-pbkdf2 | awk '{print $5}')
 
 # Создание содержимого файла /etc/grub.d/07_password
 cat <<EOL > /etc/grub.d/07_password
