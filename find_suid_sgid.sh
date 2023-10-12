@@ -45,10 +45,10 @@ for file in $suid_files; do
   file_basename=$(basename "$file")
   checksum=$(sha1sum "$file" | awk '{print $1}')
   permissions=""
-  if [ -perm -u=s ]; then
+  if test -u "$file"; then
     permissions+="u"
   fi
-  if [ -perm -g=s ]; then
+  if test -g "$file"; then
     permissions+="g"
   fi
   printf "%-30s %-40s %s\n" "$file_basename" "$checksum" "$permissions" >> "$output_file"
