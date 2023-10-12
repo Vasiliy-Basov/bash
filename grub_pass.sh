@@ -35,7 +35,7 @@ fi
 # Генерация хэша пароля с помощью grub-mkpasswd-pbkdf2
 # echo -e, вы можете выводить такие escape-последовательности, как \n для перевода строки, \t для табуляции и другие.
 # | awk '{print $5}' - Берем только пятый столбец, разделитель пробел.
-hashed_password=$(echo -e "$password\n$password_confirm" | grub-mkpasswd-pbkdf2 | awk '{print $5}')
+hashed_password=$(echo -e "$password\n$password_confirm" | grub-mkpasswd-pbkdf2 | awk '{print $5}' | tr -d '\n')
 
 # Создание содержимого файла /etc/grub.d/07_password
 cat <<EOL > /etc/grub.d/07_password
